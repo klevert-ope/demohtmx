@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul id="userList" th:fragment="list">
+    <!--/*@thymesVar id="user" type="app.klevertopee.demohtmx.model.User"*/-->
+    <li th:each="user : ${users}" th:text="${user.getName()} + ' - ' + ${user.getEmail()}"></li>
+</ul>
+</body>
+</html>
