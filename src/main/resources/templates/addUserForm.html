@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:hx-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="formContainer">
+    <div id="userForm" th:fragment="addForm">
+        <h2>Add User</h2>
+        <form hx-on::after-request="if(event.detail.successful)this.reset()" hx-post="/users" hx-swap="outerHTML"
+              hx-target="#userList" method="post"
+              th:action="@{/users}">
+            <fieldset>
+                <label for="name">Name:</label>
+                <input hx-preserve id="name" name="name" type="text">
+                <div th:if="${errors != null}">
+                    <div th:each="error : ${errors}">
+                        <span th:if="${error.getField() == 'name'}" th:text="${error.defaultMessage}"></span>
+                    </div>
+                </div>
+
+                <label for="email">Email:</label>
+                <input hx-preserve id="email" name="email" type="email">
+                <div th:if="${errors != null}">
+                    <div th:each="error : ${errors}">
+                        <span th:if="${error.getField() == 'email'}" th:text="${error.defaultMessage}"></span>
+                    </div>
+                </div>
+            </fieldset>
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

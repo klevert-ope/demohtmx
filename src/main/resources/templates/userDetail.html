@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:hx-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HTMX Users</title>
+    <script crossorigin="anonymous"
+            integrity="sha384-oeUn82QNXPuVkGCkcrInrS1twIxKhkZiFfr2TdiuObZ3n3yIeMiqcRzkIcguaof1"
+            src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.js"></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+            rel="stylesheet"
+    >
+</head>
+<body class="container">
+<div th:fragment="detail">
+    <h3>User Details</h3>
+    <p><strong>Name:</strong> <span th:text="${user.name}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+    <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+    <button
+            hx-delete="/users/{id}"
+            hx-on::after-request="if(event.detail.successful) window.location.href='/users'"
+            hx-trigger="click"
+            th:attr="hx-delete=@{/users/{id}(id=${user.id})}"
+    >
+        Delete
+    </button>
+</div>
+</body>
+</html>
